@@ -19,8 +19,6 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.sql.*;
 import java.time.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -74,7 +72,7 @@ public class FuncionarioDAO {
                     
             st.setDate(4,java.sql.Date.valueOf(Funcionario.getDataAdmissao()));
             st.setDouble(5,Funcionario.getSalarioBase());
-            st.setDouble(6,Funcionario.getHorasTrabalhadas());
+            st.setDouble(6,Funcionario.getHorasDeTrabalho());
             st.setDouble(7,Funcionario.getValorHora());
            
             status = st.executeUpdate();
@@ -104,12 +102,12 @@ public class FuncionarioDAO {
         int id = rs.getInt("id");
         String nome = rs.getString("nome");
         String CPF = rs.getString("cpf");
-        Date dataAdmissao = rs.getDate("dataAdmissao");
+        LocalDate dataAdmissao =  rs.getDate("dataAdmissao").toLocalDate();
         String cargo = rs.getString("cargo");
         Float salarioBase = rs.getFloat("salarioBase");
-        Float horasTrabalhadas = rs.getFloat("horasTrabalhadas");
+        int horasTrabalhadas = rs.getInt("horasTrabalhadas");
         Float valorHora = rs.getFloat("valorHora");
-   
+        
         
         func.setId(id);
         func.setNome(nome);
@@ -117,7 +115,7 @@ public class FuncionarioDAO {
         func.setDataAdmissao(dataAdmissao);
         func.setCargo(cargo);
         func.setSalarioBase(salarioBase);
-        func.setHorasTrabalhadas(horasTrabalhadas);
+        func.setHorasDeTrabalho(horasTrabalhadas);
         func.setValorHora(valorHora);
         
         listaFuncionario.add(func);

@@ -20,13 +20,13 @@ public class Funcionario {
     private LocalDate DataAdmissao;
     private String cargo;   
     private Float SalarioBase;
-    private Float HorasTrabalhadas;
+    private int HorasDeTrabalho;
     private Float ValorHora;  
 
 public double CalcularSalario(Float SalarioBase, Float HrsTrabalhadas){
   double TotalSalario;
    ValorHora = (SalarioBase / 30);
-   TotalSalario = ValorHora * this.getHorasTrabalhadas();
+   TotalSalario = ValorHora * this.getHorasDeTrabalho();
    return TotalSalario;
 };
 
@@ -81,12 +81,12 @@ public double CalcularSalario(Float SalarioBase, Float HrsTrabalhadas){
         this.SalarioBase = SalarioBase;
     }
 
-    public double getHorasTrabalhadas() {
-        return HorasTrabalhadas;
+    public double getHorasDeTrabalho() {
+        return HorasDeTrabalho;
     }
 
-    public void setHorasTrabalhadas(Float HorasTrabalhadas) {
-        this.HorasTrabalhadas = HorasTrabalhadas;
+    public void setHorasDeTrabalho(int HorasTrabalhadas) {
+        this.HorasDeTrabalho = HorasTrabalhadas;
     }
 
     public double getValorHora() {
@@ -97,8 +97,5 @@ public double CalcularSalario(Float SalarioBase, Float HrsTrabalhadas){
         this.ValorHora = ValorHora;
     }
 
-    public void setDataAdmissao(java.util.Date dataAdmissao) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
+   
 }
