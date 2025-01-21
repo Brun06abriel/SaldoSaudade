@@ -47,7 +47,7 @@ Boolean Disponivel;
             }
     
 
-    
+    /*
               private void RestultadoPesquisa(String NomePesquisa) {
                FuncionarioDAO FUNCDAO = new FuncionarioDAO();
             
@@ -65,9 +65,9 @@ Boolean Disponivel;
                         l.getISBN(),
                     };
                     tabelaUsers.addRow(obj);
-                }    */
+                }    
             }
-    
+    */
     public ListaFuncionarios() {
         initComponents();
         preencherTabela();

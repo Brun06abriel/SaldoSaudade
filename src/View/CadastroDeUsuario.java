@@ -230,7 +230,7 @@ public class CadastroDeUsuario extends javax.swing.JFrame {
             Func.setDataAdmissao(Admissao);
             Func.setCargo(jFormattedTextFieldSalario.getText());
             Func.setSalarioBase(Float.valueOf(jFormattedTextFieldSalario.getText()));
-            Func.setHorasDeTrabalho(Float.valueOf(jFormattedTextFieldHorasTrabalho.getText()));
+            Func.setHorasDeTrabalho(Integer.valueOf(jFormattedTextFieldHorasTrabalho.getText()));
             Func.setValorHora(Float.valueOf(jFormattedTextFieldValorHora.getText()));
            
           
