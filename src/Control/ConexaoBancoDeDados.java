@@ -25,7 +25,7 @@ public class ConexaoBancoDeDados {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); 
             // inserir informações para conexao com banco de dados externo
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bibliotecaariano","root","Bruno123");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_saldoSaudade","root","Bruno123");
             System.out.println( "Conexao com o banco de dados estabelecida." );
             return true;
         } catch (ClassNotFoundException | java.sql.SQLException ex) {

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Models;
+package Control;
 
 import Control.ConexaoBancoDeDados;
 import Model.Funcionario;
@@ -20,19 +20,34 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.sql.*;
+import java.time.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.sql.Connection;
+import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author bruno
  */
 public class FuncionarioDAO {
-    Connection conn;
+    ConexaoBancoDeDados CBD = new ConexaoBancoDeDados();
     PreparedStatement st;
     
-    PreparedStatement st3;
-    PreparedStatement st2;
     ResultSet rs;
     
+        
+    /*
      public boolean conectar(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -43,20 +58,24 @@ public class FuncionarioDAO {
             System.out.println("Erro ao conectar1: " + ex.getMessage());
             return false;
         }
-    }
+    }*/
     
     public int SalvarFuncionario(Funcionario Funcionario) {
-       conectar();
+       CBD.conectar();
        
         int status;
         try {
-            st = conn.prepareStatement("INSERT INTO livro(titulo,autor,editora,isbn,estoque,disponivel_emprestimo, preco_venda) VALUES(?,?,?,?,?,?,?)");
+            st = CBD.conn.prepareStatement("INSERT INTO Funcionario(nome,cpf,cargo,dataAdmissao,SalarioBase,horasTrabalhadas,valorHora) VALUES(?,?,?,?,?,?,?)");
             st.setString(1,Funcionario.getNome());
             st.setString(2,Funcionario.getCPF());
-            st.setDate(3, (java.sql.Date) Funcionario.getDataAdmissao());
-            st.setDouble(4,Funcionario.getSalarioBase());
-            st.setDouble(5,Funcionario.getHorasTrabalhadas());
-            st.setDouble(6,Funcionario.getValorHora());
+            st.setString(3,Funcionario.getCargo());
+            
+            
+                    
+            st.setDate(4,java.sql.Date.valueOf(Funcionario.getDataAdmissao()));
+            st.setDouble(5,Funcionario.getSalarioBase());
+            st.setDouble(6,Funcionario.getHorasTrabalhadas());
+            st.setDouble(7,Funcionario.getValorHora());
            
             status = st.executeUpdate();
             return status; //retornar 1
@@ -68,12 +87,12 @@ public class FuncionarioDAO {
         
         public java.util.List<Funcionario> ListarFuncionarios(){
        
-        conectar();
+        CBD.conectar();
     String sql = "SELECT * FROM Funcionario" ;
           try {
 
     /* Executando o comando select */
-     PreparedStatement stmt = this.conn.prepareStatement(sql);
+     PreparedStatement stmt = CBD.conn.prepareStatement(sql);
                     rs = stmt.executeQuery();            
                     
     java.util.List<Funcionario> listaFuncionario = new ArrayList<>();
@@ -81,22 +100,25 @@ public class FuncionarioDAO {
     while (rs.next()) {
         Funcionario func = new Funcionario();
      
-        // aguardando banco de dados
+        
         int id = rs.getInt("id");
-        String titulo = rs.getString("nome");
-        String autor = rs.getString("CPF");
-        String editora = rs.getString("Da");
-        String isbn = rs.getString("isbn");
-        Boolean disponibilidade = rs.getBoolean("disponivel_emprestimo");
+        String nome = rs.getString("nome");
+        String CPF = rs.getString("cpf");
+        Date dataAdmissao = rs.getDate("dataAdmissao");
+        String cargo = rs.getString("cargo");
+        Float salarioBase = rs.getFloat("salarioBase");
+        Float horasTrabalhadas = rs.getFloat("horasTrabalhadas");
+        Float valorHora = rs.getFloat("valorHora");
    
         
         func.setId(id);
-        func.setNome(titulo);
-        func.setCPF(autor);/*
-        func.setDataAdmissao();
-        func.setSalariobase();
-        func.setHorasTrabalho();
-        func.setValorHora();*/
+        func.setNome(nome);
+        func.setCPF(CPF);
+        func.setDataAdmissao(dataAdmissao);
+        func.setCargo(cargo);
+        func.setSalarioBase(salarioBase);
+        func.setHorasTrabalhadas(horasTrabalhadas);
+        func.setValorHora(valorHora);
         
         listaFuncionario.add(func);
     }

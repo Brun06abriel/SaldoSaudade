@@ -4,7 +4,10 @@
  */
 package Model;
 
-import java.util.Date;
+import java.time.*;
+import java.time.LocalDateTime;
+
+
 
 /**
  *
@@ -14,13 +17,13 @@ public class Funcionario {
     private int id;
     private String nome;
     private String CPF;
-    private Date DataAdmissao;
+    private LocalDate DataAdmissao;
     private String cargo;   
-    private double SalarioBase;
-    private double HorasTrabalhadas;
-    private double ValorHora;  
+    private Float SalarioBase;
+    private Float HorasTrabalhadas;
+    private Float ValorHora;  
 
-public double CalcularSalario(double SalarioBase,double HrsTrabalhadas){
+public double CalcularSalario(Float SalarioBase, Float HrsTrabalhadas){
   double TotalSalario;
    ValorHora = (SalarioBase / 30);
    TotalSalario = ValorHora * this.getHorasTrabalhadas();
@@ -54,11 +57,11 @@ public double CalcularSalario(double SalarioBase,double HrsTrabalhadas){
         this.CPF = CPF;
     }
 
-    public Date getDataAdmissao() {
+    public LocalDate getDataAdmissao() {
         return DataAdmissao;
     }
 
-    public void setDataAdmissao(Date DataAdmissao) {
+    public void setDataAdmissao(LocalDate DataAdmissao) {
         this.DataAdmissao = DataAdmissao;
     }
 
@@ -74,7 +77,7 @@ public double CalcularSalario(double SalarioBase,double HrsTrabalhadas){
         return SalarioBase;
     }
 
-    public void setSalarioBase(double SalarioBase) {
+    public void setSalarioBase(Float SalarioBase) {
         this.SalarioBase = SalarioBase;
     }
 
@@ -82,7 +85,7 @@ public double CalcularSalario(double SalarioBase,double HrsTrabalhadas){
         return HorasTrabalhadas;
     }
 
-    public void setHorasTrabalhadas(double HorasTrabalhadas) {
+    public void setHorasTrabalhadas(Float HorasTrabalhadas) {
         this.HorasTrabalhadas = HorasTrabalhadas;
     }
 
@@ -90,8 +93,12 @@ public double CalcularSalario(double SalarioBase,double HrsTrabalhadas){
         return ValorHora;
     }
 
-    public void setValorHora(double ValorHora) {
+    public void setValorHora(Float ValorHora) {
         this.ValorHora = ValorHora;
+    }
+
+    public void setDataAdmissao(java.util.Date dataAdmissao) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }
