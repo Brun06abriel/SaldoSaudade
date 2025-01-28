@@ -4,8 +4,11 @@
  */
 package Model;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.*;
 import java.time.LocalDateTime;
+import java.util.Locale;
 
 
 
@@ -24,7 +27,10 @@ public class Funcionario {
     private Float ValorHora;  
 
 public Float CalcularHoraTrabalho(Float SalarioBase, int HrsTrabalhadas){
-   float ValorHoraPago = SalarioBase /  HrsTrabalhadas;
+    
+    float ValorHoraPago = SalarioBase /  HrsTrabalhadas;
+    DecimalFormat df = new DecimalFormat("0.##");
+    df.format(ValorHoraPago);
    return ValorHoraPago;
 };
 
