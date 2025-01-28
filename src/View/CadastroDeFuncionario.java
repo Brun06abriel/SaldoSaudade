@@ -16,12 +16,12 @@ import java.sql.*;
  *
  * @author Bruno & Domênica
  */
-public class CadastroDeUsuario extends javax.swing.JFrame {
+public class CadastroDeFuncionario extends javax.swing.JFrame {
 
     /**
      * Creates new form CadastroDeUsuario
      */
-    public CadastroDeUsuario() {
+    public CadastroDeFuncionario() {
         initComponents();
     }
 
@@ -40,11 +40,9 @@ public class CadastroDeUsuario extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jTextFieldnome = new javax.swing.JTextField();
-        jFormattedTextFieldValorHora = new javax.swing.JFormattedTextField();
         jFormattedTextFieldAdmissao = new javax.swing.JFormattedTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jFormattedTextFieldSalario = new javax.swing.JFormattedTextField();
@@ -63,8 +61,6 @@ public class CadastroDeUsuario extends javax.swing.JFrame {
 
         jLabel5.setText("Salário Mensal:");
 
-        jLabel6.setText("Valor da Hora Trabalhada:");
-
         jLabel7.setText("Horas de Trabalho:");
 
         jButton1.setText("Cadastrar");
@@ -75,8 +71,6 @@ public class CadastroDeUsuario extends javax.swing.JFrame {
         });
 
         jTextFieldnome.setText("jTextField1");
-
-        jFormattedTextFieldValorHora.setText("00");
 
         jFormattedTextFieldAdmissao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("####/##/##"))));
         jFormattedTextFieldAdmissao.setText("2020-10-10");
@@ -100,10 +94,6 @@ public class CadastroDeUsuario extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jFormattedTextFieldHorasTrabalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFormattedTextFieldValorHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
@@ -157,13 +147,9 @@ public class CadastroDeUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jFormattedTextFieldHorasTrabalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jFormattedTextFieldValorHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(66, 66, 66)
                 .addComponent(jButton1)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,35 +177,32 @@ public class CadastroDeUsuario extends javax.swing.JFrame {
        
         
         if(jTextFieldnome.getText().isEmpty()){
-            JOptionPane.showMessageDialog(CadastroDeUsuario.this, "O Campo NOME é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo NOME é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
                 jTextFieldnome.requestFocusInWindow();
             ok = false;
         }    
         if(jFormattedTextFieldCPF.getText().isEmpty()){
-            JOptionPane.showMessageDialog(CadastroDeUsuario.this, "O Campo CPF é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo CPF é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
                 jFormattedTextFieldCPF.requestFocusInWindow();
             ok = false;
         }
         if(jFormattedTextFieldAdmissao.getText().isEmpty()){
-            JOptionPane.showMessageDialog(CadastroDeUsuario.this, "O Campo DATA DE ADMISSÃO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo DATA DE ADMISSÃO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
                 jFormattedTextFieldAdmissao.requestFocusInWindow();
             ok = false;
         }
          if(jFormattedTextFieldSalario.getText().isEmpty()){
-            JOptionPane.showMessageDialog(CadastroDeUsuario.this, "O Campo SALARIO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo SALARIO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
                 jFormattedTextFieldSalario.requestFocusInWindow();
                 ok = false;
         }     
         if( jFormattedTextFieldHorasTrabalho.getText().isEmpty()){
-            JOptionPane.showMessageDialog(CadastroDeUsuario.this, "O Campo HORAS DE TRABALHO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo HORAS DE TRABALHO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
                  jFormattedTextFieldHorasTrabalho.requestFocusInWindow();
                 ok = false;
         }
-        if( jFormattedTextFieldValorHora.getText().isEmpty()){
-            JOptionPane.showMessageDialog(CadastroDeUsuario.this, "O Campo VALOR DA HORA é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
-                 jFormattedTextFieldValorHora.requestFocusInWindow();
-                ok = false;
-        }
+        
+        
         
         LocalDate Admissao = LocalDate.parse(jFormattedTextFieldAdmissao.getText(), DateTimeFormatter.ISO_DATE);
         
@@ -228,17 +211,21 @@ public class CadastroDeUsuario extends javax.swing.JFrame {
             Func.setNome(jTextFieldnome.getText());
             Func.setCPF(jFormattedTextFieldCPF.getText());
             Func.setDataAdmissao(Admissao);
-            Func.setCargo(jFormattedTextFieldSalario.getText());
+            Func.setCargo(jComboBox1.getSelectedItem().toString());
             Func.setSalarioBase(Float.valueOf(jFormattedTextFieldSalario.getText()));
             Func.setHorasDeTrabalho(Integer.valueOf(jFormattedTextFieldHorasTrabalho.getText()));
-            Func.setValorHora(Float.valueOf(jFormattedTextFieldValorHora.getText()));
-           
+            float SalarioHora
+            = Func.CalcularHoraTrabalho(Float.valueOf(jFormattedTextFieldSalario.getText()),Integer.valueOf(jFormattedTextFieldHorasTrabalho.getText())); 
+            Func.setValorHora(SalarioHora);
           
            FuncDAO.SalvarFuncionario(Func);
+           
         }          
             
             
-            
+             ListaFuncionarios tela = new ListaFuncionarios();
+             this.dispose();
+             tela.setVisible(true);
         
                  
         
@@ -265,20 +252,21 @@ public class CadastroDeUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroDeUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroDeFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroDeUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroDeFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroDeUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroDeFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroDeUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroDeFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroDeUsuario().setVisible(true);
+                new CadastroDeFuncionario().setVisible(true);
             }
         });
     }
@@ -290,13 +278,11 @@ public class CadastroDeUsuario extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
     private javax.swing.JFormattedTextField jFormattedTextFieldHorasTrabalho;
     private javax.swing.JFormattedTextField jFormattedTextFieldSalario;
-    private javax.swing.JFormattedTextField jFormattedTextFieldValorHora;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldnome;

@@ -23,11 +23,9 @@ public class Funcionario {
     private int HorasDeTrabalho;
     private Float ValorHora;  
 
-public double CalcularSalario(Float SalarioBase, Float HrsTrabalhadas){
-  double TotalSalario;
-   ValorHora = (SalarioBase / 30);
-   TotalSalario = ValorHora * this.getHorasDeTrabalho();
-   return TotalSalario;
+public Float CalcularHoraTrabalho(Float SalarioBase, int HrsTrabalhadas){
+   float ValorHoraPago = SalarioBase /  HrsTrabalhadas;
+   return ValorHoraPago;
 };
 
     
@@ -89,13 +87,13 @@ public double CalcularSalario(Float SalarioBase, Float HrsTrabalhadas){
         this.HorasDeTrabalho = HorasTrabalhadas;
     }
 
-    public double getValorHora() {
+    public Float getValorHora() {
         return ValorHora;
     }
 
     public void setValorHora(Float ValorHora) {
         this.ValorHora = ValorHora;
     }
-
+   
    
 }

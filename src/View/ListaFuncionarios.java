@@ -17,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
  * @author bruno
  */
 public class ListaFuncionarios extends javax.swing.JFrame {
-Boolean Disponivel;
     /**
      * Creates new form pesquisalivro
      */
@@ -27,24 +26,28 @@ Boolean Disponivel;
             
                 List<Funcionario> listadefuncionarios = FUNCDAO.ListarFuncionarios();
                 
-                 DefaultTableModel tabelaUsers = (DefaultTableModel) jTableLivros.getModel(); 
+                 DefaultTableModel tabelaUsers = (DefaultTableModel) jTableFuncionarios.getModel(); 
             
                  
-                for (Funcionario l : listadefuncionarios) { 
+                for (Funcionario F : listadefuncionarios) { 
                     Object[] obj = new Object[] { 
-                        l.getId(),            
-                        l.getNome(),   
-                        l.getCargo(),
-                        l.getDataAdmissao(),
-                        l.getSalarioBase(),
-                        l.getHorasDeTrabalho(),
+                        F.getId(),            
+                        F.getNome(),   
+                        F.getCargo(),
+                        F.getDataAdmissao(),
+                        F.getSalarioBase(),
+                        F.getHorasDeTrabalho(),
+                        F.getValorHora(),
+                        
+                        
+                        
                         
                     };
                     tabelaUsers.addRow(obj);
-                    
-                    
+                     
                 }    
-            }
+
+}
     
 
     /*
@@ -91,13 +94,8 @@ Boolean Disponivel;
         jTextFieldPesquisaTitulo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jTextFieldPesquisaAutor = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableLivros = new javax.swing.JTable();
-        jButtonEditar = new javax.swing.JButton();
-        jButtonPesquisar = new javax.swing.JButton();
-        jButtonEmprestar = new javax.swing.JButton();
-        jButtonExcluir = new javax.swing.JButton();
-        jButtonVoltar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableFuncionarios = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,86 +120,37 @@ Boolean Disponivel;
 
         jTextFieldPesquisaAutor.setBackground(new java.awt.Color(250, 240, 230));
 
-        jTableLivros.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome", "Data de Admissao", "Salario Base", "Hs de trabalho"
+                "ID", "Nome", "Cargo", "Data  Admissao", "Salario/Mês", "Horas de Trabalho", "Valor Hora"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTableLivros.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableLivrosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTableLivros);
-        if (jTableLivros.getColumnModel().getColumnCount() > 0) {
-            jTableLivros.getColumnModel().getColumn(0).setMinWidth(50);
-            jTableLivros.getColumnModel().getColumn(0).setMaxWidth(30);
-            jTableLivros.getColumnModel().getColumn(1).setMinWidth(200);
-            jTableLivros.getColumnModel().getColumn(2).setMinWidth(100);
-            jTableLivros.getColumnModel().getColumn(3).setMinWidth(100);
-            jTableLivros.getColumnModel().getColumn(4).setMinWidth(100);
+        jScrollPane2.setViewportView(jTableFuncionarios);
+        if (jTableFuncionarios.getColumnModel().getColumnCount() > 0) {
+            jTableFuncionarios.getColumnModel().getColumn(0).setMinWidth(30);
+            jTableFuncionarios.getColumnModel().getColumn(0).setMaxWidth(50);
+            jTableFuncionarios.getColumnModel().getColumn(1).setMaxWidth(220);
+            jTableFuncionarios.getColumnModel().getColumn(2).setMaxWidth(200);
+            jTableFuncionarios.getColumnModel().getColumn(3).setMinWidth(70);
+            jTableFuncionarios.getColumnModel().getColumn(3).setMaxWidth(150);
+            jTableFuncionarios.getColumnModel().getColumn(4).setMinWidth(100);
+            jTableFuncionarios.getColumnModel().getColumn(4).setMaxWidth(120);
+            jTableFuncionarios.getColumnModel().getColumn(5).setMinWidth(50);
+            jTableFuncionarios.getColumnModel().getColumn(5).setMaxWidth(110);
+            jTableFuncionarios.getColumnModel().getColumn(6).setMinWidth(70);
+            jTableFuncionarios.getColumnModel().getColumn(6).setMaxWidth(90);
         }
-
-        jButtonEditar.setBackground(new java.awt.Color(179, 227, 91));
-        jButtonEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonEditar.setForeground(new java.awt.Color(90, 93, 99));
-        jButtonEditar.setText("Editar");
-        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarActionPerformed(evt);
-            }
-        });
-
-        jButtonPesquisar.setBackground(new java.awt.Color(212, 175, 55));
-        jButtonPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonPesquisar.setForeground(new java.awt.Color(204, 255, 255));
-        jButtonPesquisar.setText("Buscar");
-        jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPesquisarActionPerformed(evt);
-            }
-        });
-
-        jButtonEmprestar.setBackground(new java.awt.Color(91, 227, 173));
-        jButtonEmprestar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonEmprestar.setForeground(new java.awt.Color(102, 102, 102));
-        jButtonEmprestar.setText("Emprestar");
-        jButtonEmprestar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEmprestarActionPerformed(evt);
-            }
-        });
-
-        jButtonExcluir.setBackground(new java.awt.Color(122, 58, 47));
-        jButtonExcluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonExcluir.setForeground(new java.awt.Color(250, 240, 230));
-        jButtonExcluir.setText("Excluir");
-        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluirActionPerformed(evt);
-            }
-        });
-
-        jButtonVoltar.setBackground(new java.awt.Color(255, 51, 51));
-        jButtonVoltar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButtonVoltar.setForeground(new java.awt.Color(250, 240, 230));
-        jButtonVoltar.setText("Voltar");
-        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVoltarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -211,36 +160,25 @@ Boolean Disponivel;
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addGap(334, 334, 334))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButtonEditar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonExcluir)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonEmprestar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonVoltar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldPesquisaTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldPesquisaAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(278, 278, 278)
-                .addComponent(jButtonPesquisar)
-                .addGap(19, 19, 19))
+                        .addComponent(jTextFieldPesquisaAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(384, 384, 384))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 929, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,22 +187,15 @@ Boolean Disponivel;
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
-                .addGap(24, 24, 24)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTextFieldPesquisaTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextFieldPesquisaAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPesquisar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonEmprestar)
-                    .addComponent(jButtonEditar)
-                    .addComponent(jButtonExcluir)
-                    .addComponent(jButtonVoltar))
-                .addGap(74, 74, 74))
+                    .addComponent(jTextFieldPesquisaAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,100 +215,6 @@ Boolean Disponivel;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-}// TODO add your handling code here:
-    /*           int Selecionado = jTableLivros.getSelectedRow();
-               int  IDSelecionado = Integer.parseInt(jTableLivros.getValueAt(Selecionado, 0).toString());
-         
-        if(Selecionado >= 0){
-            cadastroLivro Editarlivro = new cadastroLivro(IDSelecionado);
-            ListaFuncionarios.this.dispose();
-           Editarlivro.setLocation(300, 200);
-           Editarlivro.setVisible(true);
-           
-       }else{
-           JOptionPane.showMessageDialog(null, "Selecione um usuario para Editar!");
-           }
-    }//GEN-LAST:event_jButtonEditarActionPerformed
-
-    private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
-        // TODO add your handling code here:
-            ((DefaultTableModel) jTableLivros.getModel()).setRowCount(0);
-            
-      ListaFuncionarios.this.RestultadoPesquisa(jTextFieldPesquisaTitulo.getText(),jTextFieldPesquisaAutor.getText());
-      
-      if(jTextFieldPesquisaTitulo.getText().isEmpty() || jTextFieldPesquisaAutor.getText().isEmpty()){
-          
-      preencherTabela();
-      
-      }
-      
-    }//GEN-LAST:event_jButtonPesquisarActionPerformed
-
-    private void jButtonEmprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmprestarActionPerformed
-        // TODO add your handling code here:
-         int Selecionado = jTableLivros.getSelectedRow();
-       
-         int  IDSelecionado = Integer.parseInt(jTableLivros.getValueAt(Selecionado, 0).toString());
-         
-        if(Selecionado >= 0){
-            TelaEmprestimoLivro  EmprestarLivro = new TelaEmprestimoLivro(IDSelecionado);
-            ListaFuncionarios.this.dispose();
-           EmprestarLivro.setLocation(300, 200);
-           EmprestarLivro.setVisible(true);
-       }else{
-           JOptionPane.showMessageDialog(null, "Selecione um usuario para Editar!");
-           } 
-    }//GEN-LAST:event_jButtonEmprestarActionPerformed
-
-    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        // TODO add your handling code here:
-                 int Selecionado = jTableLivros.getSelectedRow();
-         
-        int  IDSelecionado = Integer.parseInt(jTableLivros.getValueAt(Selecionado, 0).toString());
-         
-            
-         
-            if(Selecionado >= 0){
-            LivroDAO Excluirlivro = new LivroDAO();
-            Excluirlivro.ExcluirLivro(IDSelecionado);
-            
-           System.out.println("usuario retorno : " + IDSelecionado);
-         
-             ((DefaultTableModel) jTableLivros.getModel()).setRowCount(0);
-           preencherTabela();
-           }else{
-           JOptionPane.showMessageDialog(null, "Selecione um usuario para Excluir!");
-           }  
-    }//GEN-LAST:event_jButtonExcluirActionPerformed
-
-    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
-        // TODO add your handling code here:
-        
-             ListaFuncionarios.this.dispose();
-     
-        InicioAdministrador Tela1 = new InicioAdministrador();
-      Tela1.setLocation(500, 300);
-        Tela1.setVisible(true); 
-        
-        
-    }//GEN-LAST:event_jButtonVoltarActionPerformed
-*/
-    private void jTableLivrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableLivrosMouseClicked
-        // TODO add your handling code here:
-                       int Selecionado = jTableLivros.getSelectedRow();
-                     Boolean  IDSelecionado = (Boolean) jTableLivros.getValueAt(Selecionado, 5);
-         if(IDSelecionado){
-        jButtonEmprestar.setVisible(true);
-        jButtonExcluir.setEnabled(true);
-    } else if (!IDSelecionado){
-        jButtonEmprestar.setVisible(false);
-        jButtonExcluir.setEnabled(false);
-   }
-        
-        
-    }//GEN-LAST:event_jTableLivrosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -406,13 +243,6 @@ Boolean Disponivel;
             java.util.logging.Logger.getLogger(ListaFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -423,18 +253,13 @@ Boolean Disponivel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonEditar;
-    private javax.swing.JButton jButtonEmprestar;
-    private javax.swing.JButton jButtonExcluir;
-    private javax.swing.JButton jButtonPesquisar;
-    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableLivros;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableFuncionarios;
     private javax.swing.JTextField jTextFieldPesquisaAutor;
     private javax.swing.JTextField jTextFieldPesquisaTitulo;
     // End of variables declaration//GEN-END:variables

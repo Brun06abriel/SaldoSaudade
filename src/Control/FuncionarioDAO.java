@@ -86,7 +86,7 @@ public class FuncionarioDAO {
         public java.util.List<Funcionario> ListarFuncionarios(){
        
         CBD.conectar();
-    String sql = "SELECT * FROM Funcionario" ;
+    String sql = "SELECT id,nome,dataAdmissao,cargo,salarioBase,horasTrabalhadas,valorHora FROM Funcionario" ;
           try {
 
     /* Executando o comando select */
@@ -101,7 +101,6 @@ public class FuncionarioDAO {
         
         int id = rs.getInt("id");
         String nome = rs.getString("nome");
-        String CPF = rs.getString("cpf");
         LocalDate dataAdmissao =  rs.getDate("dataAdmissao").toLocalDate();
         String cargo = rs.getString("cargo");
         Float salarioBase = rs.getFloat("salarioBase");
@@ -111,7 +110,6 @@ public class FuncionarioDAO {
         
         func.setId(id);
         func.setNome(nome);
-        func.setCPF(CPF);
         func.setDataAdmissao(dataAdmissao);
         func.setCargo(cargo);
         func.setSalarioBase(salarioBase);
