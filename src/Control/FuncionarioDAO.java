@@ -63,13 +63,10 @@ public class FuncionarioDAO {
        
         int status;
         try {
-            st = CBD.conn.prepareStatement("INSERT INTO Funcionario(nome,cpf,cargo,dataAdmissao,SalarioBase,horasTrabalhadas,valorHora) VALUES(?,?,?,?,?,?,?)");
+            st = CBD.conn.prepareStatement("INSERT INTO Funcionario(nome,cpf,cargo_id,dataAdmissao,SalarioBase,horasTrabalhadas,valorHora) VALUES(?,?,?,?,?,?,?)");
             st.setString(1,Funcionario.getNome());
             st.setString(2,Funcionario.getCPF());
-            st.setString(3,Funcionario.getCargo());
-            
-            
-                    
+            st.setInt(3,Funcionario.getCargo());
             st.setDate(4,java.sql.Date.valueOf(Funcionario.getDataAdmissao()));
             st.setDouble(5,Funcionario.getSalarioBase());
             st.setDouble(6,Funcionario.getHorasDeTrabalho());
@@ -86,7 +83,7 @@ public class FuncionarioDAO {
         public java.util.List<Funcionario> ListarFuncionarios(){
        
         CBD.conectar();
-    String sql = "SELECT id,nome,dataAdmissao,cargo,salarioBase,horasTrabalhadas,valorHora FROM Funcionario" ;
+    String sql = "SELECT id,nome,dataAdmissao,cargo_id,salarioBase,horasTrabalhadas,valorHora FROM Funcionario" ;
           try {
 
     /* Executando o comando select */
@@ -102,7 +99,7 @@ public class FuncionarioDAO {
         int id = rs.getInt("id");
         String nome = rs.getString("nome");
         LocalDate dataAdmissao =  rs.getDate("dataAdmissao").toLocalDate();
-        String cargo = rs.getString("cargo");
+        int cargo = rs.getInt("cargo_id");
         Float salarioBase = rs.getFloat("salarioBase");
         int horasTrabalhadas = rs.getInt("horasTrabalhadas");
         Float valorHora = rs.getFloat("valorHora");
@@ -125,7 +122,51 @@ public class FuncionarioDAO {
 }
           
     }
-    
+
+        public java.util.List<Funcionario> ListarFuncionarios2(){
+       
+        CBD.conectar();
+    String sql = "SELECT * FROM listaFuncionarios" ;
+          try {
+
+    /* Executando o comando select */
+     PreparedStatement stmt = CBD.conn.prepareStatement(sql);
+                    rs = stmt.executeQuery();            
+                    
+    java.util.List<Funcionario> listaFuncionario = new ArrayList<>();
+    /* Exibindo os resultados */
+    while (rs.next()) {
+        Funcionario func = new Funcionario();
+     
+        
+       // int id = rs.getInt("id");
+        String nome = rs.getString("nome");
+        String CPF = rs.getString("CPF");
+       
+        LocalDate dataAdmissao =  rs.getDate("dataAdmissao").toLocalDate();
+        String cargo = rs.getString("NomeCargo");
+        Float salarioBase = rs.getFloat("salarioBase");
+       // int horasTrabalhadas = rs.getInt("horasTrabalhadas");
+       // Float valorHora = rs.getFloat("valorHora");
+        
+        
+        //func.setId(id);
+        func.setNome(nome);
+        func.setDataAdmissao(dataAdmissao);
+        func.setCargoDesc(cargo);
+        func.setSalarioBase(salarioBase);
+        //func.setHorasDeTrabalho(horasTrabalhadas);
+       // func.setValorHora(valorHora);
+        
+        listaFuncionario.add(func);
+    }
+     return listaFuncionario;
+} catch (SQLException sqle) {
+    System.out.println( "Erro efetuando consulta : " + sqle.getMessage() );
+    return null;
+}
+          
+    }
 
     public void removerFuncionario(int id) {
         // Código para remover um funcionario pelo ID

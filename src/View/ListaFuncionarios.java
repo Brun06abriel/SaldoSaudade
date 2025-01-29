@@ -24,7 +24,7 @@ public class ListaFuncionarios extends javax.swing.JFrame {
     private void preencherTabela() {
                 FuncionarioDAO FUNCDAO = new FuncionarioDAO();
             
-                List<Funcionario> listadefuncionarios = FUNCDAO.ListarFuncionarios();
+                List<Funcionario> listadefuncionarios = FUNCDAO.ListarFuncionarios2();
                 
                  DefaultTableModel tabelaUsers = (DefaultTableModel) jTableFuncionarios.getModel(); 
             
@@ -33,7 +33,7 @@ public class ListaFuncionarios extends javax.swing.JFrame {
                     Object[] obj = new Object[] { 
                         F.getId(),            
                         F.getNome(),   
-                        F.getCargo(),
+                        F.getCargoDesc(),
                         F.getDataAdmissao(),
                         F.getSalarioBase(),
                         F.getHorasDeTrabalho(),

@@ -21,7 +21,16 @@ public class Funcionario {
     private String nome;
     private String CPF;
     private LocalDate DataAdmissao;
-    private String cargo;   
+    private int cargo;
+    private String cargoDesc;
+
+    public String getCargoDesc() {
+        return cargoDesc;
+    }
+
+    public void setCargoDesc(String cargoDesc) {
+        this.cargoDesc = cargoDesc;
+    }
     private Float SalarioBase;
     private int HorasDeTrabalho;
     private Float ValorHora;  
@@ -69,11 +78,11 @@ public Float CalcularHoraTrabalho(Float SalarioBase, int HrsTrabalhadas){
         this.DataAdmissao = DataAdmissao;
     }
 
-    public String getCargo() {
+    public int getCargo() {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(int cargo) {
         this.cargo = cargo;
     }
 
@@ -100,6 +109,8 @@ public Float CalcularHoraTrabalho(Float SalarioBase, int HrsTrabalhadas){
     public void setValorHora(Float ValorHora) {
         this.ValorHora = ValorHora;
     }
+
+    
    
    
 }

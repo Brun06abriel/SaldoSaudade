@@ -291,7 +291,7 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
             Func.setNome(jTextFieldnome.getText());
             Func.setCPF(jFormattedTextFieldCPF.getText());
             Func.setDataAdmissao(Admissao);
-            Func.setCargo(jComboBoxCargo.getSelectedItem().toString());
+            Func.setCargo(jComboBoxCargo.getSelectedIndex()+1);
             Func.setSalarioBase(Float.valueOf(jFormattedTextFieldSalario.getText()));
             Func.setHorasDeTrabalho(Integer.valueOf(jFormattedTextFieldHorasTrabalho.getText()));
             float SalarioHora

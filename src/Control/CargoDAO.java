@@ -23,7 +23,7 @@ ConexaoBancoDeDados CBD = new ConexaoBancoDeDados();
     
       public List<String> ListarNomesUsuarios() {
         CBD.conectar();
-        String sql = "SELECT NomeCargo FROM Cargo";
+        String sql = "SELECT id,NomeCargo FROM Cargo";
         try {
             PreparedStatement stmt = CBD.conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
