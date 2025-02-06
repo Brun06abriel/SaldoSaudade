@@ -22,18 +22,36 @@ public class Funcionario {
     private String CPF;
     private LocalDate DataAdmissao;
     private int cargo;
-    private String cargoDesc;
-
-    public String getCargoDesc() {
+    private String cargoDesc; 
+    private Float SalarioBase;
+    private int HorasDeTrabalho;
+    private Float ValorHora;
+    private int turno;
+    private String turnoDesc;
+    
+     public String getCargoDesc() {
         return cargoDesc;
     }
 
     public void setCargoDesc(String cargoDesc) {
         this.cargoDesc = cargoDesc;
     }
-    private Float SalarioBase;
-    private int HorasDeTrabalho;
-    private Float ValorHora;  
+
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+
+    public String getTurnoDesc() {
+        return turnoDesc;
+    }
+
+    public void setTurnoDesc(String turnoDesc) {
+        this.turnoDesc = turnoDesc;
+    }
 
 public Float CalcularHoraTrabalho(Float SalarioBase, int HrsTrabalhadas){
     

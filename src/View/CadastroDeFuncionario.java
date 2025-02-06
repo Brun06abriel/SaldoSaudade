@@ -56,6 +56,22 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
             comboBox.addItem(usuario);
         }
     }
+       
+      
+       
+       
+       //mudanças
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -116,6 +132,11 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
         jFormattedTextFieldAdmissao.setText("2020-10-10");
 
         jComboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCargoActionPerformed(evt);
+            }
+        });
 
         jFormattedTextFieldSalario.setText("10000");
 
@@ -127,6 +148,11 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
         jFormattedTextFieldCPF.setText("222.222.222-22");
 
         jComboBoxTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTurnoActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("VOLTAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -251,11 +277,7 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
         boolean ok = true;
         Funcionario Func = new Funcionario();
         FuncionarioDAO FuncDAO = new FuncionarioDAO();
-         
-        
-         
        
-        
         if(jTextFieldnome.getText().isEmpty()){
             JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo NOME é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
                 jTextFieldnome.requestFocusInWindow();
@@ -282,8 +304,6 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
                 ok = false;
         }
         
-        
-        
         LocalDate Admissao = LocalDate.parse(jFormattedTextFieldAdmissao.getText(), DateTimeFormatter.ISO_DATE);
         
 
@@ -291,6 +311,7 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
             Func.setNome(jTextFieldnome.getText());
             Func.setCPF(jFormattedTextFieldCPF.getText());
             Func.setDataAdmissao(Admissao);
+            Func.setTurno(jComboBoxTurno.getSelectedIndex()+1);
             Func.setCargo(jComboBoxCargo.getSelectedIndex()+1);
             Func.setSalarioBase(Float.valueOf(jFormattedTextFieldSalario.getText()));
             Func.setHorasDeTrabalho(Integer.valueOf(jFormattedTextFieldHorasTrabalho.getText()));
@@ -302,22 +323,36 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
            
         }          
             
-            
              ListaFuncionarios tela = new ListaFuncionarios();
              this.dispose();
              tela.setVisible(true);
-        
-                 
-        
-       
-       
-      
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+   int HrD=0;
+    private void jComboBoxTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTurnoActionPerformed
+        // TODO add your handling code here:
+        FuncionarioDAO FUNC =  new FuncionarioDAO();
+         HrD = FUNC.DefinirHorario(jComboBoxTurno.getSelectedIndex()+1);
+        jFormattedTextFieldHorasTrabalho.setText(String.valueOf(HrD));
+        int SalD = FUNC.DefinirSalario(jComboBoxCargo.getSelectedIndex()+1) * HrD;
+        jFormattedTextFieldSalario.setText(String.valueOf(SalD));
+        
+    }//GEN-LAST:event_jComboBoxTurnoActionPerformed
+
+    private void jComboBoxCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCargoActionPerformed
+     
+       // TODO add your handling code here:
+       FuncionarioDAO FUNC =  new FuncionarioDAO();
+        int SalD = FUNC.DefinirSalario(jComboBoxCargo.getSelectedIndex()+1) * HrD;
+        jFormattedTextFieldSalario.setText(String.valueOf(SalD));
+         HrD = FUNC.DefinirHorario(jComboBoxTurno.getSelectedIndex()+1);
+        jFormattedTextFieldHorasTrabalho.setText(String.valueOf(HrD));
+       
+    }//GEN-LAST:event_jComboBoxCargoActionPerformed
 
     /**
      * @param args the command line arguments

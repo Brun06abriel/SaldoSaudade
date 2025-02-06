@@ -31,19 +31,22 @@ public class ListaFuncionarios extends javax.swing.JFrame {
                  
                 for (Funcionario F : listadefuncionarios) { 
                     Object[] obj = new Object[] { 
+                        
+                        
                         F.getId(),            
                         F.getNome(),   
                         F.getCargoDesc(),
                         F.getDataAdmissao(),
-                        F.getSalarioBase(),
-                        F.getHorasDeTrabalho(),
-                        F.getValorHora(),
+                       
+                        F.getTurnoDesc(),
+                       
                         
                         
                         
                         
                     };
                     tabelaUsers.addRow(obj);
+                    
                      
                 }    
 
@@ -120,11 +123,11 @@ public class ListaFuncionarios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "Cargo", "Data  Admissao", "Salario/Mês", "Horas de Trabalho", "Valor Hora"
+                "ID", "Nome", "Cargo", "Data Admissao", "Turno de Trabalho"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -135,56 +138,52 @@ public class ListaFuncionarios extends javax.swing.JFrame {
         if (jTableFuncionarios.getColumnModel().getColumnCount() > 0) {
             jTableFuncionarios.getColumnModel().getColumn(0).setMinWidth(30);
             jTableFuncionarios.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTableFuncionarios.getColumnModel().getColumn(1).setMaxWidth(220);
+            jTableFuncionarios.getColumnModel().getColumn(1).setMaxWidth(250);
             jTableFuncionarios.getColumnModel().getColumn(2).setMaxWidth(200);
             jTableFuncionarios.getColumnModel().getColumn(3).setMinWidth(70);
             jTableFuncionarios.getColumnModel().getColumn(3).setMaxWidth(150);
-            jTableFuncionarios.getColumnModel().getColumn(4).setMinWidth(100);
-            jTableFuncionarios.getColumnModel().getColumn(4).setMaxWidth(120);
-            jTableFuncionarios.getColumnModel().getColumn(5).setMinWidth(50);
-            jTableFuncionarios.getColumnModel().getColumn(5).setMaxWidth(110);
-            jTableFuncionarios.getColumnModel().getColumn(6).setMinWidth(70);
-            jTableFuncionarios.getColumnModel().getColumn(6).setMaxWidth(90);
+            jTableFuncionarios.getColumnModel().getColumn(4).setMinWidth(50);
+            jTableFuncionarios.getColumnModel().getColumn(4).setMaxWidth(110);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 929, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldPesquisaTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldPesquisaAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(384, 384, 384))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(293, 293, 293))
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextFieldPesquisaTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(142, 142, 142)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextFieldPesquisaAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 761, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(289, 289, 289)
+                        .addComponent(jLabel7)))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel7)
-                .addGap(61, 61, 61)
+                .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTextFieldPesquisaTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(jTextFieldPesquisaAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

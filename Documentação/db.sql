@@ -9,6 +9,16 @@ CREATE TABLE Cargo(
     PRIMARY KEY (id)
     );
     
+    CREATE TABLE Horario(
+	id INT NOT NULL AUTO_INCREMENT,
+	Turno VARCHAR(20) NOT NULL,
+    diaSemana VARCHAR(100),
+    HEntrada TIME,
+    HSaida TIME,
+    cargaHoraria INT,
+    PRIMARY KEY (id)
+);
+   
 CREATE TABLE Funcionario(
 	id INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(100),
@@ -18,8 +28,10 @@ CREATE TABLE Funcionario(
     salarioBase DOUBLE,
     horasTrabalhadas INT,
     valorHora DOUBLE,
+    turno_id INT NOT NULL,
     PRIMARY KEY (id),
-	FOREIGN KEY (cargo_id) REFERENCES cargo (id) 
+	FOREIGN KEY (cargo_id) REFERENCES cargo (id),
+	FOREIGN KEY (turno_id) REFERENCES Horario(id)
 );
 
 CREATE TABLE FolhaPagamento(
@@ -57,23 +69,10 @@ CREATE TABLE Beneficio(
     valorDesconto DOUBLE,
     PRIMARY KEY (id)
 );
-
-
-CREATE TABLE Horario(
-	id INT NOT NULL AUTO_INCREMENT,
-	Turno VARCHAR(20) NOT NULL,
-    funcionario_id INT,
-    diaSemana VARCHAR(100),
-    HEntrada TIME,
-    HSaida TIME,
-    PRIMARY KEY (id),
-    FOREIGN KEY (funcionario_id) REFERENCES funcionario(id)
-);
-
 -- SELECT * FROM Funcionario;
 
 
-INSERT INTO Horario(Turno, diaSemana,HEntrada,HSaida) VALUES
+INSERT INTO Horario(Turno, diaSemana,HEntrada,HSaida,CargaHoraria) VALUES
 ('MANHÃ','SEG - SEX', '08:00' , '17:00'),
 ('TARDE','SEG - SEX', '10:00' , '19:00'),
 ('NOITE','SEG - SEX', '17:00' , '02:00'),
@@ -81,8 +80,7 @@ INSERT INTO Horario(Turno, diaSemana,HEntrada,HSaida) VALUES
 ('DOM','DOM', '09:00' , '21:00');
 
 Select * from Horario;
-
-
+ 
 
 INSERT INTO Cargo(NomeCargo, ValorHora) VALUES
 ('CEO','500.00'),
@@ -91,14 +89,50 @@ INSERT INTO Cargo(NomeCargo, ValorHora) VALUES
 ('AUXILIAR DE PRODUÇÃO','200.00'),
 ('FREE LANCE','100.00');
 
+UPDATE Cargo SET ValorHora=50 WHERE id=1;
+UPDATE Cargo SET ValorHora=40 WHERE id=2;
+UPDATE Cargo SET ValorHora=30 WHERE id=3;
+UPDATE Cargo SET ValorHora=20 WHERE id=4;
+UPDATE Cargo SET ValorHora=15 WHERE id=5;
+
+
+
 Select * from Cargo;
 
-SELECT funcionario.nome, funcionario.dataAdmissao, cargo.id, funcionario.salarioBase FROM
+-- DROP VIEW listaFuncionarios;
+ 
 
-cargo, funcionario WHERE funcionario.id =cargo.id;
-*/
+ -- FOREIGN KEY (Turno) REFERENCES Horario(id);
 
-SELECT * FROM funcionario;
-/* f, cargo c
+
+
+SELECT * FROM listaFuncionarios;
+
+
+SELECT F.nome, F.CPF, F.dataAdmissao, C.NomeCargo, H.Turno, F.salarioBase FROM
+cargo AS C JOIN funcionario AS F JOIN Horario AS H ON F.cargo_id = C.id AND F.turno_id = H.id ;
+
+
+SELECT * FROM listaFuncionarios;
+/*
+ f, cargo c
 WHERE f.id = c.id AND v.id = iv.venda_id AND p.fabricante like '%lar%';
 */
+-- DROP VIEW listaFuncionarios;
+-- CREATE VIEW listaFuncionarios AS
+-- SELECT F.nome, F.CPF, F.dataAdmissao, C.NomeCargo, H.Turno, F.salarioBase FROM
+-- cargo AS C JOIN funcionario AS F JOIN Horario AS H ON F.cargo_id = C.id AND F.turno_id = H.id ;
+-- select * from Funcionario;
+-- SELECT * FROM listaFuncionarios;
+
+-- UPDATE Horario SET CargaHoraria=8 WHERE id=1;
+-- UPDATE Horario SET CargaHoraria=8 WHERE id=2;
+-- UPDATE Horario SET CargaHoraria=8 WHERE id=3;
+-- UPDATE Horario SET CargaHoraria=10 WHERE id=4;
+-- UPDATE Horario SET CargaHoraria=10 WHERE id=5;
+
+ -- ALTER TABLE Horario 
+ -- ADD cargaHoraria INT NOT NULL;
+-- SELECT ValorHora FROM Cargo where id=1; 
+
+SELECT * FROM Funcionario;
