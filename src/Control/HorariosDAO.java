@@ -10,29 +10,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Bruno & Domênica
- */
 public class HorariosDAO {
-    
-    ConexaoBancoDeDados CBD = new ConexaoBancoDeDados();
+ ConexaoBancoDeDados CBD = new ConexaoBancoDeDados();
     
     public List<String> ListarHorarios() {
-        CBD.conectar();
-        String sql = "SELECT Turno FROM Horario";
+     CBD.conectar();
+     String sql = "SELECT Turno FROM Horario";
         try {
-            PreparedStatement stmt = CBD.conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-            List<String> listaCargo = new ArrayList<>();
+         PreparedStatement stmt = CBD.conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery();
+         List<String> listaCargo = new ArrayList<>();
             while (rs.next()) {
-                listaCargo.add(rs.getString("Turno"));
+             listaCargo.add(rs.getString("Turno"));
             }
-            return listaCargo;
+         return listaCargo;
         } catch (SQLException sqle) {
-            System.out.println("Erro ao listar turnos: " + sqle.getMessage());
-            return null;
+         System.out.println("Erro ao listar turnos: " + sqle.getMessage());
+         return null;
         }
-    }
-    
+    }    
 }

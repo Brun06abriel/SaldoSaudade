@@ -11,19 +11,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Bruno & Domênica
- */
-
 public class CargoDAO {
+ ConexaoBancoDeDados CBD = new ConexaoBancoDeDados();
     
-    
-ConexaoBancoDeDados CBD = new ConexaoBancoDeDados();
-    
-      public List<String> ListarNomesUsuarios() {
-        CBD.conectar();
-        String sql = "SELECT id,NomeCargo FROM Cargo";
+    public List<String> ListarCargos() {
+     CBD.conectar();
+     String sql = "SELECT id,NomeCargo FROM Cargo";
         try {
             PreparedStatement stmt = CBD.conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -36,9 +29,5 @@ ConexaoBancoDeDados CBD = new ConexaoBancoDeDados();
             System.out.println("Erro ao listar cargos: " + sqle.getMessage());
             return null;
         }
-    }
-    
-        
-    
-    
+    }   
 }

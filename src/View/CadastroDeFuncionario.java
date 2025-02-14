@@ -10,69 +10,53 @@ import Control.FuncionarioDAO;
 import Control.HorariosDAO;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import javax.swing.JOptionPane;
-import java.sql.*;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
-/**
- *
- * @author Bruno & Domênica
- */
 public class CadastroDeFuncionario extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CadastroDeUsuario
-     */
-    public CadastroDeFuncionario() {
-        initComponents();
-        this.preencherComboBox(jComboBoxCargo);
-        this.preencherComboBoxTurno(jComboBoxTurno);
-    }
-
-      public void preencherComboBox(JComboBox<String> comboBox) {
-         CargoDAO userbox = new CargoDAO();
-        List<String> usuarios = userbox.ListarNomesUsuarios();
-        
-        // Limpa o comboBox antes de adicionar novos itens
-        comboBox.removeAllItems();
-        
-        // Adiciona cada nome de usuário no comboBox
-        for (String usuario : usuarios) {
-            comboBox.addItem(usuario);
-        }
-    }
-      
-       public void preencherComboBoxTurno(JComboBox<String> comboBox) {
-         HorariosDAO userbox = new HorariosDAO();
-        List<String> usuarios = userbox.ListarHorarios();
-        
-        // Limpa o comboBox antes de adicionar novos itens
-        comboBox.removeAllItems();
-        
-        // Adiciona cada nome de usuário no comboBox
-        for (String usuario : usuarios) {
-            comboBox.addItem(usuario);
-        }
-    }
-       
-      
-       
-       
-       //mudanças
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
+ boolean ok ;
     
+    public void preencherComboBoxCargo(JComboBox<String> comboBox) {
+     CargoDAO cargobox = new CargoDAO();
+     List<String> cargos = cargobox.ListarCargos();
+     comboBox.removeAllItems();
+        for (String cargoItem : cargos) {
+         comboBox.addItem(cargoItem);
+        }
+    }
+      
+    public void preencherComboBoxTurno(JComboBox<String> comboBox) {
+     HorariosDAO turnobox = new HorariosDAO();
+     List<String> turno = turnobox.ListarHorarios();
+     comboBox.removeAllItems();
+        for (String turnoItem : turno) {
+         comboBox.addItem(turnoItem);
+        }
+         
+    }
+    
+    public CadastroDeFuncionario() {
+     initComponents();
+     this.preencherComboBoxCargo(jComboBoxCargo);
+     this.preencherComboBoxTurno(jComboBoxTurno);
+     jComboBoxTurno.setEnabled(false);
+     
+     // Detectar clique com MouseListener
+        jComboBoxCargo.addPopupMenuListener(new PopupMenuListener() {
+         @Override
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+             jComboBoxTurno.setEnabled(true);          
+            }
+         @Override
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) { }
+         @Override
+            public void popupMenuCanceled(PopupMenuEvent e) { }   
+        });
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,7 +73,7 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Cadastrar = new javax.swing.JButton();
         jTextFieldnome = new javax.swing.JTextField();
         jFormattedTextFieldAdmissao = new javax.swing.JFormattedTextField();
         jComboBoxCargo = new javax.swing.JComboBox<>();
@@ -115,10 +99,10 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
 
         jLabel7.setText("Horario de Trabalho:");
 
-        jButton1.setText("CADASTRAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Cadastrar.setText("CADASTRAR");
+        Cadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                CadastrarActionPerformed(evt);
             }
         });
 
@@ -132,9 +116,10 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
         jFormattedTextFieldAdmissao.setText("2020-10-10");
 
         jComboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxCargo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxCargoActionPerformed(evt);
+        jComboBoxCargo.setToolTipText("ESCOLHA");
+        jComboBoxCargo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxCargoItemStateChanged(evt);
             }
         });
 
@@ -148,18 +133,8 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
         jFormattedTextFieldCPF.setText("222.222.222-22");
 
         jComboBoxTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxTurno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxTurnoActionPerformed(evt);
-            }
-        });
 
         jButton2.setText("VOLTAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jLabel6.setText("Cadastrar Funcionario");
 
@@ -175,7 +150,7 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(Cadastrar)
                 .addGap(22, 22, 22))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(117, 117, 117)
@@ -250,7 +225,7 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
                     .addComponent(jFormattedTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(Cadastrar)
                     .addComponent(jButton2))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
@@ -272,87 +247,83 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        boolean ok = true;
-        Funcionario Func = new Funcionario();
-        FuncionarioDAO FuncDAO = new FuncionarioDAO();
-       
-        if(jTextFieldnome.getText().isEmpty()){
-            JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo NOME é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
-                jTextFieldnome.requestFocusInWindow();
-            ok = false;
-        }    
-        if(jFormattedTextFieldCPF.getText().isEmpty()){
-            JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo CPF é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
-                jFormattedTextFieldCPF.requestFocusInWindow();
-            ok = false;
-        }
-        if(jFormattedTextFieldAdmissao.getText().isEmpty()){
-            JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo DATA DE ADMISSÃO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
-                jFormattedTextFieldAdmissao.requestFocusInWindow();
-            ok = false;
-        }
-         if(jFormattedTextFieldSalario.getText().isEmpty()){
-            JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo SALARIO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
-                jFormattedTextFieldSalario.requestFocusInWindow();
-                ok = false;
-        }     
-        if( jFormattedTextFieldHorasTrabalho.getText().isEmpty()){
-            JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo HORAS DE TRABALHO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
-                 jFormattedTextFieldHorasTrabalho.requestFocusInWindow();
-                ok = false;
-        }
-        
-        LocalDate Admissao = LocalDate.parse(jFormattedTextFieldAdmissao.getText(), DateTimeFormatter.ISO_DATE);
-        
-
-        if(ok == true){  
-            Func.setNome(jTextFieldnome.getText());
-            Func.setCPF(jFormattedTextFieldCPF.getText());
-            Func.setDataAdmissao(Admissao);
-            Func.setTurno(jComboBoxTurno.getSelectedIndex()+1);
-            Func.setCargo(jComboBoxCargo.getSelectedIndex()+1);
-            Func.setSalarioBase(Float.valueOf(jFormattedTextFieldSalario.getText()));
-            Func.setHorasDeTrabalho(Integer.valueOf(jFormattedTextFieldHorasTrabalho.getText()));
-            float SalarioHora
-            = Func.CalcularHoraTrabalho(Float.valueOf(jFormattedTextFieldSalario.getText()),Integer.valueOf(jFormattedTextFieldHorasTrabalho.getText())); 
-            Func.setValorHora(SalarioHora);
-          
-           FuncDAO.SalvarFuncionario(Func);
-           
-        }          
-            
-             ListaFuncionarios tela = new ListaFuncionarios();
-             this.dispose();
-             tela.setVisible(true);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-   int HrD=0;
-    private void jComboBoxTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTurnoActionPerformed
-        // TODO add your handling code here:
-        FuncionarioDAO FUNC =  new FuncionarioDAO();
-         HrD = FUNC.DefinirHorario(jComboBoxTurno.getSelectedIndex()+1);
-        jFormattedTextFieldHorasTrabalho.setText(String.valueOf(HrD));
-        int SalD = FUNC.DefinirSalario(jComboBoxCargo.getSelectedIndex()+1) * HrD;
-        jFormattedTextFieldSalario.setText(String.valueOf(SalD));
-        
-    }//GEN-LAST:event_jComboBoxTurnoActionPerformed
-
-    private void jComboBoxCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCargoActionPerformed
+    private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
+     ok = true;
+     Funcionario Func = new Funcionario();
+     FuncionarioDAO FuncDAO = new FuncionarioDAO();
      
-       // TODO add your handling code here:
-       FuncionarioDAO FUNC =  new FuncionarioDAO();
-        int SalD = FUNC.DefinirSalario(jComboBoxCargo.getSelectedIndex()+1) * HrD;
-        jFormattedTextFieldSalario.setText(String.valueOf(SalD));
-         HrD = FUNC.DefinirHorario(jComboBoxTurno.getSelectedIndex()+1);
-        jFormattedTextFieldHorasTrabalho.setText(String.valueOf(HrD));
+        if(jTextFieldnome.getText().isEmpty()){
+         JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo NOME é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
+         jTextFieldnome.requestFocusInWindow();
+         ok = false;
+        }    
+        
+        if(jFormattedTextFieldCPF.getText().isEmpty()){
+         JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo CPF é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
+         jFormattedTextFieldCPF.requestFocusInWindow();
+         ok = false;
+        }
+        
+        if(jFormattedTextFieldAdmissao.getText().isEmpty()){
+         JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo DATA DE ADMISSÃO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
+         jFormattedTextFieldAdmissao.requestFocusInWindow();
+         ok = false;
+        }
+        
+        if(jFormattedTextFieldSalario.getText().isEmpty()){
+         JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo SALARIO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
+         jFormattedTextFieldSalario.requestFocusInWindow();
+         ok = false;
+        }
+        
+        if( jFormattedTextFieldHorasTrabalho.getText().isEmpty()){
+         JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo HORAS DE TRABALHO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
+         jFormattedTextFieldHorasTrabalho.requestFocusInWindow();
+         ok = false;
+        }
+        
+        if(!jComboBoxTurno.isEnabled()){
+         ok = false;
+        }
        
-    }//GEN-LAST:event_jComboBoxCargoActionPerformed
+     LocalDate Admissao = LocalDate.parse(jFormattedTextFieldAdmissao.getText(), DateTimeFormatter.ISO_DATE);
+     float SalarioHora;
+        if(ok){  
+         Func.setNome(jTextFieldnome.getText());
+         Func.setCPF(jFormattedTextFieldCPF.getText());
+         Func.setDataAdmissao(Admissao);
+         Func.setTurno(jComboBoxTurno.getSelectedIndex()+1);
+         Func.setCargo(jComboBoxCargo.getSelectedIndex()+1);
+         Func.setSalarioBase(Float.valueOf(jFormattedTextFieldSalario.getText()));
+         Func.setHorasDeTrabalho(Integer.valueOf(jFormattedTextFieldHorasTrabalho.getText()));
+          SalarioHora = Float.valueOf(jFormattedTextFieldSalario.getText()); //,Integer.valueOf(jFormattedTextFieldHorasTrabalho.getText()); 
+         Func.setValorHora(SalarioHora);
+          FuncDAO.SalvarFuncionario(Func);
+         
+         JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "CADASTRO SALVO!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
+         ListaFuncionarios tela = new ListaFuncionarios();
+         this.dispose();
+         tela.setVisible(true);
+        }else{
+         JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "ERRO NO CADASTRO!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_CadastrarActionPerformed
+   
+    
+    private void jComboBoxCargoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxCargoItemStateChanged
+        if (jComboBoxCargo.getSelectedIndex() == 4 ){     
+         this.preencherComboBoxTurno(jComboBoxTurno);
+         jComboBoxTurno.removeItem("MANHÃ");
+         jComboBoxTurno.removeItem("TARDE");
+         jComboBoxTurno.removeItem("NOITE");
+         jFormattedTextFieldHorasTrabalho.setText("40");
+        } else {     
+          this.preencherComboBoxTurno(jComboBoxTurno);
+          jComboBoxTurno.removeItem("SAB");
+          jComboBoxTurno.removeItem("DOM");
+          jFormattedTextFieldHorasTrabalho.setText("160");
+        }
+    }//GEN-LAST:event_jComboBoxCargoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -391,7 +362,7 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Cadastrar;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBoxCargo;
     private javax.swing.JComboBox<String> jComboBoxTurno;

@@ -4,14 +4,10 @@
  */
 package Model;
 
-/**
- *
- * @author Bruno & Domênica
- */
 public class Cargo {
-    private int id ;
-  private String nome;
-  private double ValorHora;
+ private int id ;
+ private String nome;
+ private double ValorHora;
 
     public int getId() {
         return id;

@@ -3,33 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Model;
-
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.time.*;
-import java.time.LocalDateTime;
-import java.util.Locale;
 
-
-
-/**
- *
- * @author Bruno & Domênica
- */
 public class Funcionario {
-    private int id;
-    private String nome;
-    private String CPF;
-    private LocalDate DataAdmissao;
-    private int cargo;
-    private String cargoDesc; 
-    private Float SalarioBase;
-    private int HorasDeTrabalho;
-    private Float ValorHora;
-    private int turno;
-    private String turnoDesc;
+ private int id;
+ private String nome;
+ private String CPF;
+ private LocalDate DataAdmissao;
+ private int cargo;
+ private String cargoDesc; 
+ private Float SalarioBase;
+ private int HorasDeTrabalho;
+ private Float ValorHora;
+ private int turno;
+ private String turnoDesc;
     
-     public String getCargoDesc() {
+    // Getters e Setters
+    public String getCargoDesc() {
         return cargoDesc;
     }
 
@@ -52,18 +43,7 @@ public class Funcionario {
     public void setTurnoDesc(String turnoDesc) {
         this.turnoDesc = turnoDesc;
     }
-
-public Float CalcularHoraTrabalho(Float SalarioBase, int HrsTrabalhadas){
-    
-    float ValorHoraPago = SalarioBase /  HrsTrabalhadas;
-    DecimalFormat df = new DecimalFormat("0.##");
-    df.format(ValorHoraPago);
-   return ValorHoraPago;
-};
-
-    
-
-// Getters e Setters  
+  
     public int getId() {
         return id;
     }
@@ -127,8 +107,4 @@ public Float CalcularHoraTrabalho(Float SalarioBase, int HrsTrabalhadas){
     public void setValorHora(Float ValorHora) {
         this.ValorHora = ValorHora;
     }
-
-    
-   
-   
 }
