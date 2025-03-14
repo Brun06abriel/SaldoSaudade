@@ -19,11 +19,11 @@ public class HorariosDAO {
         try {
          PreparedStatement stmt = CBD.conn.prepareStatement(sql);
          ResultSet rs = stmt.executeQuery();
-         List<String> listaCargo = new ArrayList<>();
+         List<String> listaTurno = new ArrayList<>();
             while (rs.next()) {
-             listaCargo.add(rs.getString("Turno"));
+             listaTurno.add(rs.getString("Turno"));
             }
-         return listaCargo;
+         return listaTurno;
         } catch (SQLException sqle) {
          System.out.println("Erro ao listar turnos: " + sqle.getMessage());
          return null;

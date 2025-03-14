@@ -73,7 +73,7 @@ public class FuncionarioDAO {
     public Funcionario CarregarCalculoSalarios(int ID) {
      CBD.conectar();
         try {
-         st = CBD.conn.prepareStatement(" SELECT F.nome, C.Nomecargo , H.Turno, H.id, F.salarioBase, F.horasTrabalhadas, H.DiastrabalhoMes FROM cargo AS C JOIN funcionario AS F JOIN Horario AS H ON"
+         st = CBD.conn.prepareStatement(" SELECT F.nome, C.Nomecargo , H.Turno, H.id,F.salarioBase, F.horasTrabalhadas, H.DiastrabalhoMes FROM cargo AS C JOIN funcionario AS F JOIN Horario AS H ON"
          + " F.cargo_id = C.id AND F.turno_id = H.id WHERE F.id = ? ;");
          st.setInt(1, ID);
          rs = st.executeQuery();
@@ -98,7 +98,7 @@ public class FuncionarioDAO {
      CBD.conectar();
      int status;
         try {
-         st = CBD.conn.prepareStatement("INSERT INTO Funcionario(nome,cpf,cargo_id,dataAdmissao,SalarioBase,turno_id,horasTrabalhadas,valorHora) VALUES(?,?,?,?,?,?,?,?)");
+         st = CBD.conn.prepareStatement("INSERT INTO Funcionario(nome,cpf,cargo_id,dataAdmissao,SalarioBase,turno_id,horasTrabalhadas) VALUES(?,?,?,?,?,?,?)");
          st.setString(1,Funcionario.getNome());
          st.setString(2,Funcionario.getCPF());
          st.setInt(3,Funcionario.getCargo());
@@ -106,7 +106,7 @@ public class FuncionarioDAO {
          st.setDouble(5,Funcionario.getSalarioBase());
          st.setInt(6,Funcionario.getTurno());
          st.setDouble(7,Funcionario.getHorasDeTrabalho());
-         st.setDouble(8,Funcionario.getValorHora());
+         
          status = st.executeUpdate();
          return status; //retornar 1
         } catch (SQLException ex) {

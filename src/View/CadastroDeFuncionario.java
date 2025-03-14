@@ -77,13 +77,13 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
         jTextFieldnome = new javax.swing.JTextField();
         jFormattedTextFieldAdmissao = new javax.swing.JFormattedTextField();
         jComboBoxCargo = new javax.swing.JComboBox<>();
-        jFormattedTextFieldSalario = new javax.swing.JFormattedTextField();
         jFormattedTextFieldCPF = new javax.swing.JFormattedTextField();
         jComboBoxTurno = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jFormattedTextFieldHorasTrabalho = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
+        jFormattedTextFieldHorasTrabalho = new javax.swing.JLabel();
+        jFormattedTextFieldSalario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,8 +123,6 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
             }
         });
 
-        jFormattedTextFieldSalario.setText("10000");
-
         try {
             jFormattedTextFieldCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
@@ -138,57 +136,63 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
 
         jLabel6.setText("Cadastrar Funcionario");
 
-        jFormattedTextFieldHorasTrabalho.setText("10000");
-
         jLabel8.setText("Carga Horaria mensal:");
+
+        jFormattedTextFieldHorasTrabalho.setText("jLabel9");
+
+        jFormattedTextFieldSalario.setText("jLabel9");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Cadastrar)
-                .addGap(22, 22, 22))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(117, 117, 117)
                 .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldnome, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(18, 18, 18)
-                            .addComponent(jFormattedTextFieldSalario))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComboBoxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jFormattedTextFieldAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(38, 38, 38)
+                        .addComponent(jButton2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jFormattedTextFieldHorasTrabalho, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 155, Short.MAX_VALUE))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jFormattedTextFieldAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jFormattedTextFieldHorasTrabalho)
+                                    .addComponent(jFormattedTextFieldSalario)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel2))
+                                        .addGap(50, 50, 50)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextFieldnome, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jFormattedTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jComboBoxTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(Cadastrar)
+                .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,17 +221,17 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
                     .addComponent(jComboBoxTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextFieldHorasTrabalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(jFormattedTextFieldHorasTrabalho))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jFormattedTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                    .addComponent(jFormattedTextFieldSalario))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cadastrar)
                     .addComponent(jButton2))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -272,13 +276,13 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
         
         if(jFormattedTextFieldSalario.getText().isEmpty()){
          JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo SALARIO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
-         jFormattedTextFieldSalario.requestFocusInWindow();
+         //aa.requestFocusInWindow();
          ok = false;
         }
         
-        if( jFormattedTextFieldHorasTrabalho.getText().isEmpty()){
+        if(jFormattedTextFieldHorasTrabalho.getText().isEmpty()){
          JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "O Campo HORAS DE TRABALHO é obrigatório!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
-         jFormattedTextFieldHorasTrabalho.requestFocusInWindow();
+       //  aa.requestFocusInWindow();
          ok = false;
         }
         
@@ -294,10 +298,9 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
          Func.setDataAdmissao(Admissao);
          Func.setTurno(jComboBoxTurno.getSelectedIndex()+1);
          Func.setCargo(jComboBoxCargo.getSelectedIndex()+1);
-         Func.setSalarioBase(Float.valueOf(jFormattedTextFieldSalario.getText()));
-         Func.setHorasDeTrabalho(Integer.valueOf(jFormattedTextFieldHorasTrabalho.getText()));
-          SalarioHora = Float.valueOf(jFormattedTextFieldSalario.getText()); //,Integer.valueOf(jFormattedTextFieldHorasTrabalho.getText()); 
-         Func.setValorHora(SalarioHora);
+         Func.setSalarioBase(SalarioTot);
+         Func.setHorasDeTrabalho(ValorHora);
+         // SalarioHora = Float.valueOf(aa.getText()); //,Integer.valueOf(jFormattedTextFieldHorasTrabalho.getText()); 
           FuncDAO.SalvarFuncionario(Func);
          
          JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "CADASTRO SALVO!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
@@ -308,7 +311,8 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
          JOptionPane.showMessageDialog(CadastroDeFuncionario.this, "ERRO NO CADASTRO!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_CadastrarActionPerformed
-   
+   int ValorHora=0;
+   Float HorasTrabalho, SalarioTot ;
     
     private void jComboBoxCargoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxCargoItemStateChanged
         if (jComboBoxCargo.getSelectedIndex() == 4 ){     
@@ -316,13 +320,25 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
          jComboBoxTurno.removeItem("MANHÃ");
          jComboBoxTurno.removeItem("TARDE");
          jComboBoxTurno.removeItem("NOITE");
-         jFormattedTextFieldHorasTrabalho.setText("40");
+         HorasTrabalho = 40.0f ;
+         ValorHora = 15;
         } else {     
           this.preencherComboBoxTurno(jComboBoxTurno);
           jComboBoxTurno.removeItem("SAB");
           jComboBoxTurno.removeItem("DOM");
-          jFormattedTextFieldHorasTrabalho.setText("160");
-        }
+          HorasTrabalho = 160.0f;
+          
+          switch(jComboBoxCargo.getSelectedIndex()){
+              case 0:  ValorHora = 50; break; 
+              case 1:  ValorHora = 40; break;
+              case 2:  ValorHora = 30; break;
+              case 3:  ValorHora = 20; break;
+          }    
+          }
+        SalarioTot = HorasTrabalho * ValorHora;
+        jFormattedTextFieldHorasTrabalho.setText(String.valueOf(HorasTrabalho));
+        jFormattedTextFieldSalario.setText(String.valueOf(SalarioTot));
+        
     }//GEN-LAST:event_jComboBoxCargoItemStateChanged
 
     /**
@@ -368,8 +384,8 @@ public class CadastroDeFuncionario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxTurno;
     private javax.swing.JFormattedTextField jFormattedTextFieldAdmissao;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
-    private javax.swing.JFormattedTextField jFormattedTextFieldHorasTrabalho;
-    private javax.swing.JFormattedTextField jFormattedTextFieldSalario;
+    private javax.swing.JLabel jFormattedTextFieldHorasTrabalho;
+    private javax.swing.JLabel jFormattedTextFieldSalario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

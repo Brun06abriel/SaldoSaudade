@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/bruno/OneDrive/Documentos/BrunoGabriel/Projetos/SaldoSaudade/src/Model/Funcionario.java</file>
+            <file>file:/C:/Users/bruno/OneDrive/Documentos/BrunoGabriel/Projetos/SaldoSaudade/src/Control/FuncionarioDAO.java</file>
             <file>file:/C:/Users/bruno/OneDrive/Documentos/BrunoGabriel/Projetos/SaldoSaudade/src/View/CadastroDeFuncionario.java</file>
+            <file>file:/C:/Users/bruno/OneDrive/Documentos/BrunoGabriel/Projetos/SaldoSaudade/src/Model/Horarios.java</file>
+            <file>file:/C:/Users/bruno/OneDrive/Documentos/BrunoGabriel/Projetos/SaldoSaudade/src/View/CalcularSalarioBruto.java</file>
+            <file>file:/C:/Users/bruno/OneDrive/Documentos/BrunoGabriel/Projetos/SaldoSaudade/src/Control/HorariosDAO.java</file>
+            <file>file:/C:/Users/bruno/OneDrive/Documentos/BrunoGabriel/Projetos/SaldoSaudade/src/Model/Cargo.java</file>
         </group>
     </open-files>
 </project-private>

@@ -15,7 +15,6 @@ public class Funcionario {
  private String cargoDesc; 
  private Float SalarioBase;
  private int HorasDeTrabalho;
- private Float ValorHora;
  private int turno;
  private String turnoDesc;
     
@@ -84,7 +83,7 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
-    public double getSalarioBase() {
+    public float getSalarioBase() {
         return SalarioBase;
     }
 
@@ -100,11 +99,4 @@ public class Funcionario {
         this.HorasDeTrabalho = HorasTrabalhadas;
     }
 
-    public Float getValorHora() {
-        return ValorHora;
-    }
-
-    public void setValorHora(Float ValorHora) {
-        this.ValorHora = ValorHora;
-    }
 }

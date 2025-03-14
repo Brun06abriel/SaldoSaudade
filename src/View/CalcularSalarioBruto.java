@@ -20,6 +20,8 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
  int IDSelecionado;
  Locale ptBr = new Locale("pt", "BR");
  String SalarioString ; 
+ Float SalarioAjstDias;
+ int DiasTrabalhoMensal;
  
     public CalcularSalarioBruto() {
      initComponents();
@@ -30,9 +32,12 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
      jCheckBox1.setSelected(true);   
      CalcularSalarioBruto.this.setLocation(500, 300);
      IDSelecionado = ID;
+     
      preencherDados();
      VerificarFalta();
      SalarioString  = NumberFormat.getCurrencyInstance(ptBr).format(func.getSalarioBase());
+     DiasTrabalhoMensal = Integer.valueOf(jTFDiasTrabalho.getText());
+     SalarioAjstDias = func.getSalarioBase();
     }
     
     public int DefinirSalarioBruto( Float valor){
@@ -47,7 +52,7 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
      func = FuncDAO.CarregarCalculoSalarios(IDSelecionado);
      jLNOME.setText(func.getNome());
      jTFcargo.setText(func.getCargoDesc());
-     jLSalario.setText(String.valueOf(func.getSalarioBase()));
+     jLSalarioBase.setText(String.valueOf(func.getSalarioBase()));
      jTFturno.setText(func.getTurnoDesc());
         if(func.getTurno()== 3){
          jBNoturno.setBackground(Color.red);
@@ -59,7 +64,7 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
             if(func.getTurno() <= 3){
              jTFDiasTrabalho.setText(String.valueOf(20));
              jTFDiasTrabalho.setEnabled(false);
-             Float Valor = Float.valueOf(jLSalario.getText());
+             Float Valor = Float.valueOf(jLSalarioBase.getText());
              this.DefinirSalarioBruto(Valor);
             }else if(func.getTurno() == 4 || func.getTurno() == 5)  {
              jTFDiasTrabalho.setText(String.valueOf(8)); 
@@ -91,26 +96,27 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
         CriarPagamento = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFieldDiasExtras = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        jButtonAddDiasExtras = new javax.swing.JButton();
         jBNoturno = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jTextField8 = new javax.swing.JTextField();
-        jLSalario = new javax.swing.JLabel();
+        jLSalarioBase = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jTFcargo = new javax.swing.JLabel();
         jLSalarioAtlzd = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jButtonAplicarFalta = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTFturno = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,7 +127,7 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
 
         jLabel3.setText("Base salarial:");
 
-        jLabel4.setText("Horas Extras:");
+        jLabel4.setText("Dias Extras:");
 
         jTFDiasTrabalho.setText("00");
 
@@ -138,7 +144,7 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
 
         jLabel9.setText("Adicional Noturno:");
 
-        jTextField5.setText("DESCONTOXX");
+        jTextFieldDiasExtras.setText("0");
 
         jLabel10.setText("Insalubridade:");
 
@@ -150,9 +156,19 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
 
         jLabel12.setText("Salario Bruto atualizado: ");
 
-        jButton3.setText("APLICAR");
+        jButtonAddDiasExtras.setText("APLICAR");
+        jButtonAddDiasExtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddDiasExtrasActionPerformed(evt);
+            }
+        });
 
         jBNoturno.setText("APLICAR");
+        jBNoturno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBNoturnoActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("APLICAR");
 
@@ -160,11 +176,14 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
 
         jButton7.setText("APLICAR TODOS");
 
-        jTextField8.setText("DESCONTOXX");
-
-        jLSalario.setText("VALOR SALARIO ");
+        jLSalarioBase.setText("VALOR SALARIO ");
 
         jCheckBox1.setText("Sem Faltas");
+        jCheckBox1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox1StateChanged(evt);
+            }
+        });
         jCheckBox1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jCheckBox1MouseClicked(evt);
@@ -175,13 +194,21 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
 
         jLSalarioAtlzd.setText("Salario atualizado");
 
-        jButton4.setText("APLICAR");
+        jButtonAplicarFalta.setText("APLICAR");
+        jButtonAplicarFalta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAplicarFaltaActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Cargo:");
 
         jLabel6.setText("Turno de trabalho:");
 
         jTFturno.setText("TURNO");
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel13.setText("22:00 as 05:00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,35 +221,21 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLNOME, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLSalarioAtlzd)
                         .addGap(87, 87, 87)
                         .addComponent(jButton7))
+                    .addComponent(jLabel9)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton5)
-                                    .addComponent(jBNoturno)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jButton6))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLNOME, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(151, 151, 151))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel11)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(15, 15, 15)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,33 +243,45 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
                                 .addComponent(jLabel5))
                             .addGap(64, 64, 64)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(39, 39, 39)
-                                    .addComponent(jTFturno))
-                                .addComponent(jLabel6)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addComponent(jTFturno))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLSalarioBase)
+                                .addComponent(jLabel3)))
+                        .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel8)
                                 .addComponent(jLabel4))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(31, 31, 31)
-                                    .addComponent(jButton3))
-                                .addGroup(layout.createSequentialGroup()
                                     .addComponent(jTFDiasTrabalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(jCheckBox1)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton4))
+                                    .addComponent(jButtonAplicarFalta))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGap(179, 179, 179)
+                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jButton5))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jButton6))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                                        .addComponent(jTextFieldDiasExtras))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLSalario))))
-                            .addGap(102, 102, 102))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jButtonAddDiasExtras))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGap(5, 5, 5)
+                                            .addComponent(jBNoturno)))))
+                            .addGap(13, 13, 13))))
+                .addContainerGap(51, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(CriarPagamento)
@@ -283,41 +308,43 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTFturno)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(jTFDiasTrabalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox1)
-                            .addComponent(jButton4)))
+                            .addComponent(jButtonAplicarFalta)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLSalario)
+                        .addComponent(jLSalarioBase)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(jTextFieldDiasExtras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAddDiasExtras))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBNoturno))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jButton6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(46, 46, 46)
+                            .addComponent(jLabel10)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addGap(23, 23, 23)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jButton6))
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLSalarioAtlzd)
@@ -346,6 +373,55 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
      FolhaDAO.AbrirFolhaDePagamento(Folha);
      JOptionPane.showMessageDialog(CalcularSalarioBruto.this, "A folha de de XXXXXXXXXXXXXXXXX foi Aberta!","INFORMAÇãO",JOptionPane.INFORMATION_MESSAGE);         
     }//GEN-LAST:event_CriarPagamentoActionPerformed
+
+    private void jButtonAplicarFaltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAplicarFaltaActionPerformed
+        // TODO add your handling code here:
+       
+        
+      SalarioAjstDias = (Float.valueOf(jLSalarioBase.getText()) /  Float.valueOf(DiasTrabalhoMensal)) * Float.valueOf(jTFDiasTrabalho.getText());
+      // System.out.print(DiasTrabalhoMensal);
+      // System.out.print(jLSalarioBase.getText());
+       //System.out.print(jTFDiasTrabalho.getText());
+       
+      //VLRapagar = (Salario BASE * Dias trabalho Base) / dias trabalhados; 
+      jLSalarioAtlzd.setText(String.valueOf(SalarioAjstDias));
+    }//GEN-LAST:event_jButtonAplicarFaltaActionPerformed
+
+    private void jCheckBox1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox1StateChanged
+        // TODO add your handling code here:
+        if(jCheckBox1.isSelected()){
+            jButtonAplicarFalta.setEnabled(false);
+        }else{
+            jButtonAplicarFalta.setEnabled(true);
+        }
+    }//GEN-LAST:event_jCheckBox1StateChanged
+
+    private void jButtonAddDiasExtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddDiasExtrasActionPerformed
+        // TODO add your handling code here:
+     Float SalarioAjusteExtras =  (Float.valueOf(jLSalarioBase.getText()) /  Float.valueOf(DiasTrabalhoMensal)) * Float.valueOf(jTextFieldDiasExtras.getText());   
+      Float SalarioAtualizado2 = SalarioAjstDias + SalarioAjusteExtras;
+      jLSalarioAtlzd.setText(String.valueOf(SalarioAtualizado2));
+    }//GEN-LAST:event_jButtonAddDiasExtrasActionPerformed
+
+    private void jBNoturnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNoturnoActionPerformed
+        // TODO add your handling code here:
+       int horasNormaisPorDia = 8; // Total de horas trabalhadas por dia
+        int horasNoturnas = 5; // Horas aptas para adicional noturno
+        Float adicionalPercentual = 0.20f; // 20% de adicional noturno
+        int diasNoMes = 20;  
+        
+      Float ValorHora =   Float.valueOf(jLSalarioBase.getText()) /  (diasNoMes * horasNormaisPorDia);
+     
+//  Float HoraNtDesc = ValorHora * 100;
+    //  Float HoraNtA = Float.valueOf(jLSalarioAtlzd.getText()) - HoraNtDesc ;
+    int diastrabalhados = horasNormaisPorDia + Integer.valueOf(jTextFieldDiasExtras.getText());
+      Float ValorHoraNoturna = (ValorHora * horasNoturnas) * adicionalPercentual * diastrabalhados;
+   //   Float ValorpagoNoturno = HoraNtA + (ValorHoraNoturna * 100);
+   System.out.print(ValorHoraNoturna);
+      Float SalarioAtualizado3 = Float.valueOf(jLSalarioAtlzd.getText()) + ValorHoraNoturna;
+      jLSalarioAtlzd.setText(String.valueOf(SalarioAtualizado3));
+        // Horas Noturna/dia = 5 - dias trabalho no mes = 20 5*20=100 horas noturnas
+    }//GEN-LAST:event_jBNoturnoActionPerformed
 
     public static Float converterParaNumero(String valor) {
         try {
@@ -397,18 +473,19 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
     private javax.swing.JButton CriarPagamento;
     private javax.swing.JButton jBNoturno;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButtonAddDiasExtras;
+    private javax.swing.JButton jButtonAplicarFalta;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLNOME;
-    private javax.swing.JLabel jLSalario;
     private javax.swing.JLabel jLSalarioAtlzd;
+    private javax.swing.JLabel jLSalarioBase;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -419,9 +496,9 @@ public class CalcularSalarioBruto extends javax.swing.JFrame {
     private javax.swing.JTextField jTFDiasTrabalho;
     private javax.swing.JLabel jTFcargo;
     private javax.swing.JLabel jTFturno;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextFieldDiasExtras;
     // End of variables declaration//GEN-END:variables
 }
